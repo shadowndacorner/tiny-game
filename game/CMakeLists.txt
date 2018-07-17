@@ -9,7 +9,7 @@ file(
 )
 
 if (WIN32)
-    set(PLATFORM_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+    set(PLATFORM_SRC_DIR ${PLATFORM_ROOT_DIR}/windows)
     file(
         GLOB_RECURSE PLATFORM_SRCS 
         "${PLATFORM_ROOT_DIR}/windows/*.cpp"
@@ -50,8 +50,8 @@ source_group(
 	FILES ${GAME_SRCS}
 )
 
-#source_group(
-#	TREE "${PLATFORM_SRC_DIR}" 
-#	PREFIX "Platform Source"
-#	FILES ${PLATFORM_SRCS}
-#)
+source_group(
+	TREE "${PLATFORM_SRC_DIR}" 
+	PREFIX "Platform Source"
+	FILES ${PLATFORM_SRCS}
+)
