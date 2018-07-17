@@ -6,10 +6,7 @@ namespace tiny
 	// contains all game data.
 	// Allocated on the heap to guarantee it
 	// doesn't exist as static data.
-	struct GameMemory
-	{
-
-	};
+	struct GameMemory;
 
 	class Game
 	{

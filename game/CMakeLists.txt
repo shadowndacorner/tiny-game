@@ -38,10 +38,12 @@ target_include_directories (
     ${GLFW_INCLUDE_DIR}
     ${STB_INCLUDE_DIR}
     ${GLM_INCLUDE_DIR}
+    ${BOX2D_INCLUDE_DIR}
 )
 
 target_link_libraries (
-	tinygame
+    tinygame
+    box2d
     ${PLATFORM_LINKS}
 )
 

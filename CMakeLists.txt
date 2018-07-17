@@ -25,6 +25,16 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
     # GLM
         set (GLM_INCLUDE_DIR ${THIRDPARTY_DIR}/glm)
     # End GLM
+
+    # Chipmunk2D
+        set (BOX2D_ROOT_DIR ${THIRDPARTY_DIR}/box2d_cmake)
+        set (BOX2D_INCLUDE_DIR ${BOX2D_ROOT_DIR}/Box2D)
+        set(BUILD_DEMOS OFF)
+        set(INSTALL_DEMOS OFF)
+        set(BUILD_SHARED OFF)
+        set(BUILD_STATIC ON)
+        add_subdirectory(${BOX2D_ROOT_DIR})
+    # End Chipmunk2D
 # End 3rdParty
 
 if (WIN32)
