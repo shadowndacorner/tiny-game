@@ -21,6 +21,10 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
     # STB
         set (STB_INCLUDE_DIR ${THIRDPARTY_DIR}/stb)
     # End STB
+
+    # GLM
+        set (GLM_INCLUDE_DIR ${THIRDPARTY_DIR}/glm)
+    # End GLM
 # End 3rdParty
 
 if (WIN32)
