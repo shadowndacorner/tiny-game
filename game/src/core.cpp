@@ -17,7 +17,12 @@ tiny::Game::~Game()
 	delete active_memory;
 }
 
-void tiny::Game::run()
+void tiny::Game::update(double gt, double dt)
 {
 	// This is where the core game loop goes
+}
+
+void tiny::Game::render(double gt, double dt)
+{
+
 }

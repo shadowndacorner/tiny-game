@@ -5,9 +5,12 @@
 #include <Windows.h>
 #endif
 
+#include <GLFW/glfw3.h>
+
+#define WINDOW_TYPE GLFWwindow*
 struct WindowsPlatformShared
 {
-	HWND hWnd;
+	WINDOW_TYPE window;
 };
 
 extern WindowsPlatformShared* platform_data;

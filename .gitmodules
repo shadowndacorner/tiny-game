@@ -2,3 +2,6 @@
 	path = 3rdParty/glfw
 	url = https://github.com/glfw/glfw
 	branch = latest
+[submodule "3rdParty/stb"]
+	path = 3rdParty/stb
+	url = https://github.com/nothings/stb

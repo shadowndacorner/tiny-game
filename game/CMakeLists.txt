@@ -15,6 +15,9 @@ if (WIN32)
         "${PLATFORM_ROOT_DIR}/windows/*.cpp"
         "${PLATFORM_ROOT_DIR}/windows/*.hpp"
         "${PLATFORM_ROOT_DIR}/windows/*.h"
+        "${PLATFORM_ROOT_DIR}/opengl/*.c"
+        "${PLATFORM_ROOT_DIR}/opengl/*.cpp"
+        "${PLATFORM_ROOT_DIR}/opengl/*.hpp"
     )
 else()
     message(FATAL_ERROR "Attempting to run cmake for unsupported platform" )
@@ -32,6 +35,7 @@ target_include_directories (
     PUBLIC
     ${GAME_INCLUDE_DIR}
     ${GLFW_INCLUDE_DIR}
+    ${STB_INCLUDE_DIR}
 )
 
 target_link_libraries (
@@ -52,7 +56,7 @@ source_group(
 )
 
 source_group(
-	TREE "${PLATFORM_SRC_DIR}" 
+	TREE "${PLATFORM_ROOT_DIR}" 
 	PREFIX "Platform Source"
 	FILES ${PLATFORM_SRCS}
 )

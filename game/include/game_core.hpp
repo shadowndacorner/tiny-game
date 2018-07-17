@@ -21,7 +21,8 @@ namespace tiny
 		~Game();
 
 	public:
-		void run();
+		void update(double gt, double dt);
+		void render(double gt, double dt);
 
 	public:
 		GameMemory* active_memory;

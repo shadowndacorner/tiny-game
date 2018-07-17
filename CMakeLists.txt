@@ -8,6 +8,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # 3rdParty
     set( THIRDPARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdParty )
+    
     # GLFW
         set (GLFW_ROOT ${THIRDPARTY_DIR}/glfw)
         set (GLFW_STATIC true)
@@ -16,6 +17,10 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
         add_subdirectory(${GLFW_ROOT})
     # End GLFW
+    
+    # STB
+        set (STB_INCLUDE_DIR ${THIRDPARTY_DIR}/stb)
+    # End STB
 # End 3rdParty
 
 if (WIN32)
