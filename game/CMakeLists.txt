@@ -30,7 +30,8 @@ add_executable (tinygame ${GAME_SRCS} ${PLATFORM_SRCS} ${GAME_INCLUDES})
 target_include_directories (
     tinygame
     PUBLIC
-	${GAME_INCLUDE_DIR}
+    ${GAME_INCLUDE_DIR}
+    ${GLFW_INCLUDE_DIR}
 )
 
 target_link_libraries (

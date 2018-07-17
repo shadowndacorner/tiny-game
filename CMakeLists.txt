@@ -6,6 +6,18 @@ set(CMAKE_C_FLAGS_DEBUG "-DDEBUG")
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+# 3rdParty
+    set( THIRDPARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdParty )
+    # GLFW
+        set (GLFW_ROOT ${THIRDPARTY_DIR}/glfw)
+        set (GLFW_STATIC true)
+        set (GLFW_VULKAN_STATIC off)
+        set (GLFW_INCLUDE_DIR ${THIRDPARTY_DIR}/include)
+
+        add_subdirectory(${GLFW_ROOT})
+    # End GLFW
+# End 3rdParty
+
 if (WIN32)
     # Disable exceptions and RTTI
     if(CMAKE_CXX_FLAGS MATCHES "/EHsc ")
@@ -33,7 +45,7 @@ if (WIN32)
     endif()
 
 	add_definitions(-DTINYGAME_WIN32)
-	set (PLATFORM_LINKS )
+	set (PLATFORM_LINKS glfw)
 ELSE ()
     # Not implemented yet
 	add_definitions(-DTINYGAME_LINUX)
