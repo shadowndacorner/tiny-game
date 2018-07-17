@@ -12,7 +12,7 @@ namespace tiny
 			struct PlatformSpecificTextureData;
 		}
 
-		class Texture
+		class Image
 		{
 			struct image_data
 			{
@@ -31,10 +31,10 @@ namespace tiny
 			};
 
 		public:
-			Texture();
-			Texture(Texture&&);
-			Texture(const Texture&) = delete;
-			~Texture();
+			Image();
+			Image(Image&&);
+			Image(const Image&) = delete;
+			~Image();
 
 		public:
 			bool is_valid() const;
@@ -52,6 +52,6 @@ namespace tiny
 		};
 
 		// for now, handles are just shared ptrs
-		typedef tiny::shared_ptr<Texture> TextureHandle;
+		typedef tiny::shared_ptr<Image> ImageHandle;
 	}
 }

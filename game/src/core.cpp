@@ -1,5 +1,5 @@
 #include <game_core.hpp>
-#include <graphics/texture.hpp>
+#include <graphics/image.hpp>
 
 static tiny::Game* active_game = nullptr;
 
@@ -13,7 +13,7 @@ tiny::Game::Game(tiny::Platform* plat)
 	active_memory = new GameMemory;
 	
 	// textures
-	graphics::Texture m_tex;
+	graphics::Image m_tex;
 	m_tex.load("data/x.jpg");
 }
 
