@@ -17,6 +17,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	}
 }
 
+#include <fstream>
 int main(int argc, char** argv)
 {
 	platform_data = new WindowsPlatformShared;

@@ -4,6 +4,8 @@ set (CMAKE_CXX_STANDARD 17)
 project (tinygame VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_C_FLAGS_DEBUG "-DDEBUG")
 
+set ( TINYGAME_ROOT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
+set ( GAME_DATA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/gamedata )
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # 3rdParty
@@ -35,32 +37,35 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
         set(BUILD_STATIC ON)
         add_subdirectory(${BOX2D_ROOT_DIR})
     # End Chipmunk2D
-# End 3rdParty
+
+    set( CEREAL_INCLUDE_DIR ${THIRDPARTY_DIR}/cereal/include )# End 3rdParty
 
 if (WIN32)
-    # Disable exceptions and RTTI
-    if(CMAKE_CXX_FLAGS MATCHES "/EHsc ")
-        string(REPLACE "/EHsc" "/EHs-c-" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-        message(STATUS "CMAKE_CXX_FLAGS matches /EHsc before end of string -- replaced...")
-        message(STATUS "")
-    endif()
+    if (DISABLE_EXCEPTIONS)
+        # Disable exceptions and RTTI
+        if(CMAKE_CXX_FLAGS MATCHES "/EHsc ")
+            string(REPLACE "/EHsc" "/EHs-c-" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+            message(STATUS "CMAKE_CXX_FLAGS matches /EHsc before end of string -- replaced...")
+            message(STATUS "")
+        endif()
 
-    if(CMAKE_CXX_FLAGS MATCHES "/EHsc$")
-        string(REPLACE "/EHsc" "/EHs-c-" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-        message(STATUS "CMAKE_CXX_FLAGS matches /EHsc at end of string -- replaced...")
-        message(STATUS "")
-    endif()
+        if(CMAKE_CXX_FLAGS MATCHES "/EHsc$")
+            string(REPLACE "/EHsc" "/EHs-c-" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+            message(STATUS "CMAKE_CXX_FLAGS matches /EHsc at end of string -- replaced...")
+            message(STATUS "")
+        endif()
 
-    if(CMAKE_CXX_FLAGS MATCHES "/GR ")
-        string(REPLACE "/GR" "/GR-" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-        message(STATUS "CMAKE_CXX_FLAGS matches /GR before end of string -- replaced...")
-        message(STATUS "")
-    endif()
+        if(CMAKE_CXX_FLAGS MATCHES "/GR ")
+            string(REPLACE "/GR" "/GR-" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+            message(STATUS "CMAKE_CXX_FLAGS matches /GR before end of string -- replaced...")
+            message(STATUS "")
+        endif()
 
-    if(CMAKE_CXX_FLAGS MATCHES "/GR$")
-        string(REPLACE "/GR" "/GR-" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-        message(STATUS "CMAKE_CXX_FLAGS matches /GR at end of string -- replaced...")
-        message(STATUS "")
+        if(CMAKE_CXX_FLAGS MATCHES "/GR$")
+            string(REPLACE "/GR" "/GR-" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+            message(STATUS "CMAKE_CXX_FLAGS matches /GR at end of string -- replaced...")
+            message(STATUS "")
+        endif()
     endif()
 
 	add_definitions(-DTINYGAME_WIN32)

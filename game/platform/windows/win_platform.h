@@ -2,7 +2,7 @@
 
 #ifndef _WINDOWS_
 #define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+//#include <Windows.h>
 #endif
 
 #include <GLFW/glfw3.h>

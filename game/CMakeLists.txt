@@ -39,6 +39,7 @@ target_include_directories (
     ${STB_INCLUDE_DIR}
     ${GLM_INCLUDE_DIR}
     ${BOX2D_INCLUDE_DIR}
+    ${CEREAL_INCLUDE_DIR}
 )
 
 target_link_libraries (
@@ -46,6 +47,8 @@ target_link_libraries (
     box2d
     ${PLATFORM_LINKS}
 )
+
+set_target_properties(tinygame PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${GAME_DATA_DIR})
 
 source_group(
 	TREE "${GAME_INCLUDE_DIR}" 

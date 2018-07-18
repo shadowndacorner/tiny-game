@@ -1,5 +1,7 @@
 build/**
+gamedata/**
 bin/**
 .vscode/*
 
 !.vscode/tasks.json
+!gamedata/README.md

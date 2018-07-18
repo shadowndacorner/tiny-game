@@ -11,3 +11,6 @@
 [submodule "3rdParty/box2d_cmake/Box2D"]
 	path = 3rdParty/box2d_cmake/Box2D
 	url = https://github.com/erincatto/Box2D
+[submodule "3rdParty/cereal"]
+	path = 3rdParty/cereal
+	url = https://github.com/USCiLab/cereal

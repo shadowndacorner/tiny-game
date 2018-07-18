@@ -1,9 +1,11 @@
-#include <game_core.hpp>
-#include <graphics/image.hpp>
+#include <fstream>
 #include <Box2D/Box2D.h>
+#include <game_core.hpp>
+#include <game/config.hpp>
+#include <graphics/image.hpp>
+#include <cereal/archives/json.hpp>
 
 static tiny::Game* active_game = nullptr;
-
 namespace tiny
 {
 	struct GameMemory
@@ -28,10 +30,32 @@ tiny::Game* tiny::Game::get_active_game()
 	return active_game;
 }
 
+bool file_exist(const char* filename)
+{
+	struct stat	buffer;
+	return (stat(filename, &buffer) == 0);
+}
+
 tiny::Game::Game(tiny::Platform* plat)
 {
 	active_memory = new GameMemory;
 	
+	tiny::game::GameConfig cfg;
+	{
+		if (!file_exist("config.json"))
+		{
+			std::fstream stream("config.json", std::ios::binary | std::ios::out);
+			cereal::JSONOutputArchive ar(stream);
+			cfg.write(ar);
+		}
+		else
+		{
+			std::fstream stream("config.json", std::ios::binary | std::ios::in);
+			cereal::JSONInputArchive ar(stream);
+			ar(cfg);
+		}
+	}
+
 	// textures
 	graphics::Image m_tex;
 	m_tex.load("data/x.jpg");
