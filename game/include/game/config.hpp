@@ -19,9 +19,18 @@ namespace tiny
 		struct GameConfig
 		{
 			template <typename Archive>
-			void write(Archive& ar)
+			bool archive(Archive& ar)
 			{
-				ar(cereal::make_nvp("config", *this));
+				try
+				{
+					ar(cereal::make_nvp("config", *this));
+				}
+				catch (cereal::Exception& exc)
+				{
+					std::cerr << "Failed to load config" << std::endl;
+					return false;
+				}
+				return true;
 			}
 
 			struct Graphics
@@ -43,14 +52,14 @@ namespace tiny
 
 		SERIALIZE_METHOD(GameConfig)
 		{
-			WRITE_VAR(graphics);
+			SERIALIZE_VAR(graphics);
 		}
 
 		SERIALIZE_METHOD(GameConfig::Graphics)
 		{
-			WRITE_VAR(fullscreen_mode);
-			WRITE_VAR(width);
-			WRITE_VAR(height);
+			SERIALIZE_VAR(fullscreen_mode);
+			SERIALIZE_VAR(width);
+			SERIALIZE_VAR(height);
 		}
 	}
 }

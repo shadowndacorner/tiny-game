@@ -1,5 +1,6 @@
 #pragma once
-#include <graphics/texture.hpp>
+#include <glm/glm.hpp>
+#include <graphics/image.hpp>
 
 namespace tiny
 {
@@ -8,12 +9,17 @@ namespace tiny
 		class Sprite
 		{
 		public:
-			
+			Sprite();
+			Sprite(const ImageHandle& image, const glm::vec4& bounds);
+			Sprite(const Sprite& rhs);
+			Sprite(Sprite&& rhs);
 
-		private:
-			// TODO: coords...  glm?
-			TextureHandle texture;
+			Sprite& operator=(const Sprite& rhs);
+			Sprite& operator=(Sprite&& rhs);
 
+		public:
+			glm::vec4 uv_bounds;
+			ImageHandle image;
 		};
 	}
 }

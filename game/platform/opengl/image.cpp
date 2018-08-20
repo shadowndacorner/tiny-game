@@ -32,10 +32,26 @@ namespace tiny
 			unload();
 		}
 
+		void* Image::image_data::load(const char* file, int & w, int & h, int & channels, int desired_channels)
+		{
+			stbi_set_flip_vertically_on_load(true);
+			texture_data = stbi_load(file, &w, &h, &channels, desired_channels);
+			if (!texture_data)
+			{
+				fprintf(stderr, "stbi: Failed to load image with reason: %s\n", stbi_failure_reason());
+			}
+			return texture_data;
+		}
+
 		void* Image::image_data::load(FILE * file, int & w, int & h, int & channels, int desired_channels)
 		{
 			stbi_set_flip_vertically_on_load(true);
-			return texture_data = stbi_load_from_file(file, &w, &h, &channels, desired_channels);
+			texture_data = stbi_load_from_file(file, &w, &h, &channels, desired_channels);
+			if (!texture_data)
+			{
+				fprintf(stderr, "stbi: Failed to load image with reason: %s\n", stbi_failure_reason());
+			}
+			return texture_data;
 		}
 
 		void Image::image_data::unload()
@@ -48,11 +64,6 @@ namespace tiny
 		}
 	}
 }
-
-struct OpenGL_Texture
-{
-
-};
 
 using namespace tiny::graphics;
 tiny::graphics::Image::Image()
@@ -78,12 +89,11 @@ bool tiny::graphics::Image::is_valid() const
 bool tiny::graphics::Image::load(const tiny::string & path)
 {
 	// TODO: Remove stbi, make it a build step
-	auto file = fopen(path.c_str(), "r");
-	if (!file)
-		return false;
-
 	int width, height, channels;
-	m_image_data.load(file, width, height, channels);
+	if (!m_image_data.load(path.c_str(), width, height, channels))
+	{
+		return false;
+	}
 
 	TextureFormat format;
 	switch (channels)
@@ -108,7 +118,6 @@ bool tiny::graphics::Image::load(const tiny::string & path)
 		texture.create2d(width, height, tiny::graphics::TextureFilterMode::NearestNeighbor, format, tiny::graphics::TextureWrap::Clamp);
 		texture.update((char*)m_image_data.texture_data, format, 0);
 	}
-	fclose(file);
 	return false;
 }
 

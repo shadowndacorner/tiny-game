@@ -38,8 +38,14 @@ namespace tiny
 #define SERIALIZE_METHOD(type) template<typename Archive>\
 inline void serialize(Archive& archive, type& object)
 
-#define WRITE_VAR(value) tiny::serialization::write_safe(archive, #value, object.value)
-#define WRITE_VAR_WITH_DEFAULT_FUNC(value, def) tiny::serialization::write_safe(archive, #value, object.value, def)
-#define WRITE_REQUIREFD_VAR(value) if (!WRITE_VAR(value)){\
-std::cerr << "Failed to write value " << value << " to archive" << std::endl \
+#define SERIALIZE_VAR(value) tiny::serialization::write_safe(archive, #value, object.value)
+#define SERIALIZE_NAMED_VAR(name, value) tiny::serialization::write_safe(archive, name, object.value)
+#define SERIALIZE_VAR_WITH_DEFAULT_FUNC(value, def) tiny::serialization::write_safe(archive, #value, object.value, def)
+#define SERIALIZE_NAMED_VAR_WITH_DEFAULT_FUNC(name, value, def) tiny::serialization::write_safe(archive, name, object.value, def)
+#define SERIALIZE_REQUIRED_VAR(value) if (!SERIALIZE_VAR(value)){\
+std::cerr << "Failed to serialize value " << value << " to archive" << std::endl \
+return; }
+
+#define SERIALIZE_REQUIRED_NAMED_VAR(value) if (!SERIALIZE_NAMED_VAR(name, value)){\
+std::cerr << "Failed to serialize value " << value << " to archive" << std::endl \
 return; }

@@ -12,8 +12,10 @@ namespace tiny
 			struct PlatformSpecificTextureData;
 		}
 
+		// Represents an image in both CPU and GPU memory
 		class Image
 		{
+			// CPU-side image data
 			struct image_data
 			{
 			public:
@@ -23,6 +25,7 @@ namespace tiny
 				~image_data();
 
 			public:
+				void* load(const char* file, int& w, int& h, int& channels, int desired_channels = 0);
 				void* load(FILE* file, int& w, int& h, int& channels, int desired_channels = 0);
 				void unload();
 

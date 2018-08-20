@@ -4,6 +4,7 @@
 #include <game/config.hpp>
 #include <graphics/image.hpp>
 #include <cereal/archives/json.hpp>
+#include <graphics/spritebatch.hpp>
 
 static tiny::Game* active_game = nullptr;
 namespace tiny
@@ -36,6 +37,7 @@ bool file_exist(const char* filename)
 	return (stat(filename, &buffer) == 0);
 }
 
+#include <miniz.h>
 tiny::Game::Game(tiny::Platform* plat)
 {
 	active_memory = new GameMemory;
@@ -46,19 +48,22 @@ tiny::Game::Game(tiny::Platform* plat)
 		{
 			std::fstream stream("config.json", std::ios::binary | std::ios::out);
 			cereal::JSONOutputArchive ar(stream);
-			cfg.write(ar);
+			cfg.archive(ar);
 		}
 		else
 		{
 			std::fstream stream("config.json", std::ios::binary | std::ios::in);
 			cereal::JSONInputArchive ar(stream);
-			ar(cfg);
+			cfg.archive(ar);
 		}
 	}
 
 	// textures
 	graphics::Image m_tex;
-	m_tex.load("data/x.jpg");
+	m_tex.load("data/twitter avatar.png");
+
+	
+
 }
 
 tiny::Game::~Game()
@@ -68,16 +73,21 @@ tiny::Game::~Game()
 
 void tiny::Game::update(double gt, double dt)
 {
-	// This is where the core game loop goes
 	while (active_memory->physicsTime < gt)
 	{
+		// call physics pre-tick code
 		const double timestep = 1.0 / 60.0;
 		active_memory->world.Step(float(timestep), 1, 1);
 		active_memory->physicsTime += 1.0 / 60.0;
+		
+		// call physics tick code
 	}
+	
+	// call system update code
+
 }
 
 void tiny::Game::render(double gt, double dt)
 {
-
+	// iterate through every object and send to sprite batch
 }
