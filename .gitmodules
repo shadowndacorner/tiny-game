@@ -14,3 +14,9 @@
 [submodule "3rdParty/cereal"]
 	path = 3rdParty/cereal
 	url = https://github.com/USCiLab/cereal
+[submodule "3rdParty/bgfx.cmake"]
+	path = 3rdParty/bgfx.cmake
+	url = https://github.com/JoshuaBrookover/bgfx.cmake
+[submodule "3rdParty/SDL-mirror"]
+	path = 3rdParty/SDL-mirror
+	url = https://github.com/spurious/SDL-mirror

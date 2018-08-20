@@ -1,5 +1,7 @@
 # tiny-game
 
+## This branch nullifies everything below.  Go to the master branch if you want to see something tiny.
+
 This is an experiment to see how tiny I can make a working, enjoyable game in C++.  The goal is to be able to fit the final build - including all content - within 1.44mb.  That rules out the use of many off-the-shelf libraries I would normally use for a project like this.  For instance, the release version of SDL.dll is 859kb - over half of the desired size!  However, to make it easier for myself, I will still be using a few libraries.  I'll be tracking their contributions to the executable and replacing them with custom code where necessary ("benchmarks" at the end).
 
 The initial target is Windows using DirectX for graphics/sounds and the WinAPI for windowing, with a later port to Linux and, if I really want to have fun with it, possibly Gamecube and Wii.
@@ -23,4 +25,4 @@ The total minified executable size is currently 211kb.  That consists of the fol
 Then for various stl libraries
     * #include <fstream> added 9kb to the binary
 
-Which leaves about 36mb for the game code that currently exists.  That is very much an estimate, but it seems good enough for now!  Maybe I can find some way of getting more accurate stats later on.
+Which leaves about 36kb for the game code that currently exists.  That is very much an estimate, but it seems good enough for now!  Maybe I can find some way of getting more accurate stats later on.

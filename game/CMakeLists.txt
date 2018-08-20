@@ -8,7 +8,8 @@ file(
 	"${GAME_SRC_DIR}/*.cpp"
 )
 
-if (WIN32)
+if (THIS_WILL_NOT_PASS)
+    # tiny windows platform
     set(PLATFORM_SRC_DIR ${PLATFORM_ROOT_DIR}/windows)
     file(
         GLOB_RECURSE PLATFORM_SRCS 
@@ -20,6 +21,23 @@ if (WIN32)
         "${PLATFORM_ROOT_DIR}/opengl/*.hpp"
         "${PLATFORM_ROOT_DIR}/opengl/*.h"
     )
+    set (PLATFORM_INCLUDES ${GLFW_INCLUDE_DIR})
+    set (PLATFORM_LINKS GLFW)
+elseif (WIN32 OR UNIX OR APPLE)
+    # 
+    set(PLATFORM_SRC_DIR ${PLATFORM_ROOT_DIR}/sdl)
+    file(
+        GLOB_RECURSE PLATFORM_SRCS 
+        "${PLATFORM_ROOT_DIR}/sdl/*.cpp"
+        "${PLATFORM_ROOT_DIR}/sdl/*.hpp"
+        "${PLATFORM_ROOT_DIR}/sdl/*.h"
+        "${PLATFORM_ROOT_DIR}/bgfx/*.c"
+        "${PLATFORM_ROOT_DIR}/bgfx/*.cpp"
+        "${PLATFORM_ROOT_DIR}/bgfx/*.hpp"
+        "${PLATFORM_ROOT_DIR}/bgfx/*.h"
+    )
+    set (PLATFORM_INCLUDES ${BGFX_INCLUDE_DIR} ${SDL2_INCLUDE_DIR} ${BGFX_THIRD_PARTY_DIR})
+    set (PLATFORM_LINKS SDL2 bgfx dear-imgui)
 else()
     message(FATAL_ERROR "Attempting to run cmake for unsupported platform" )
 endif()
@@ -35,11 +53,11 @@ target_include_directories (
     tinygame
     PUBLIC
     ${GAME_INCLUDE_DIR}
-    ${GLFW_INCLUDE_DIR}
     ${STB_INCLUDE_DIR}
     ${GLM_INCLUDE_DIR}
     ${BOX2D_INCLUDE_DIR}
     ${CEREAL_INCLUDE_DIR}
+    ${PLATFORM_INCLUDES}
 )
 
 target_link_libraries (

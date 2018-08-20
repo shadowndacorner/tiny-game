@@ -61,9 +61,6 @@ tiny::Game::Game(tiny::Platform* plat)
 	// textures
 	graphics::Image m_tex;
 	m_tex.load("data/twitter avatar.png");
-
-	
-
 }
 
 tiny::Game::~Game()

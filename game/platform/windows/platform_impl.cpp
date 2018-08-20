@@ -15,3 +15,4 @@ void tiny::Platform::show_error_message(const char * title, const char * message
 	auto hwnd = glfwGetWin32Window(platform_data->window);
 	MessageBox(hwnd, message, title, MB_OK | MB_ICONERROR);
 }
+

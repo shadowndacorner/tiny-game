@@ -10,5 +10,6 @@ namespace tiny
 	public:
 		void set_window_title(const char* title);
 		void show_error_message(const char* title, const char* message);
+		void* load_dll(const char* dll_path);
 	};
 }
